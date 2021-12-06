@@ -8,6 +8,7 @@
           <div class="form-group">
             <label for="nome">Nome</label>
             <input
+              [(ngModel)]="user.name"
               class="form-control"
               type="text"
               name="nome"
@@ -19,6 +20,7 @@
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
+              [(ngModel)]="user.username"
               class="form-control"
               type="text"
               name="email"
@@ -30,6 +32,7 @@
           <div class="form-group">
             <label for="foto">Link da Foto</label>
             <input
+              [(ngModel)]="user.picture"
               class="form-control"
               type="text"
               name="foto"
@@ -41,6 +44,7 @@
           <div class="form-group">
             <label for="senha">Senha</label>
             <input
+              (input)="confirmPassword($event)"
               class="form-control"
               type="password"
               name="senha"
@@ -52,6 +56,7 @@
           <div class="form-group">
             <label for="confirmSenha">Confirmar Senha</label>
             <input
+              [(ngModel)]="user.password"
               class="form-control"
               type="password"
               name="confirmSenha"
@@ -62,10 +67,15 @@
 
           <div class="form-group">
             <label for="tipo">Tipo de Usuário</label>
-            <select class="form-control" name="tipo" id="tipo">
+            <select
+              class="form-control"
+              name="tipo"
+              id="tipo"
+              (change)="tipoUser($event)"
+            >
               <option>Selecione um tipo de usuário:</option>
-              <option value="Normal"></option>
-              <option value="Administrador"></option>
+              <option value="normal">Normal</option>
+              <option value="adm">Administrador</option>
             </select>
           </div>
 
@@ -73,7 +83,9 @@
             <button type="submit" class="btn cancel mr-4" routerLink="/entrar">
               Cancelar
             </button>
-            <button type="submit" class="btn register">Cadastrar</button>
+            <button type="submit" class="btn register" (click)="cadastrar()">
+              Cadastrar
+            </button>
           </div>
         </div>
       </div>

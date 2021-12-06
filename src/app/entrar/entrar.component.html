@@ -9,6 +9,7 @@
           <div class="form-group">
             <label for="email">E-mail</label>
             <input
+              [(ngModel)]="userLogin.usernamelog"
               class="form-control"
               type="text"
               name="email"
@@ -20,6 +21,7 @@
           <div class="form-group pt-3">
             <label for="senha">Senha</label>
             <input
+              [(ngModel)]="userLogin.passwordlog"
               class="form-control"
               type="password"
               name="senha"
@@ -29,7 +31,9 @@
           </div>
 
           <div class="d-flex justify-content-end pt-4">
-            <button type="submit" class="btn access">Acessar</button>
+            <button type="submit" class="btn access" (click)="entrar()">
+              Acessar
+            </button>
           </div>
 
           <hr class="mt-5 mb-5" />
