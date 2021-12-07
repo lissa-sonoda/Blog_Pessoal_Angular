@@ -15,7 +15,7 @@
     <ul class="navbar-nav mr-auto d-flex align-items-center">
       <li class="nav-item active">
         <img
-          src="https://avatars.githubusercontent.com/u/64852389?v=4"
+          src="{{ foto }}"
           alt="Imagem do usuário"
           width="50px"
           height="50px"
@@ -24,7 +24,7 @@
       </li>
 
       <li class="nav-item pl-3">
-        <p class="m-0 font-weight-bolder text-white fs-16">Nome do Usuario</p>
+        <p class="m-0 font-weight-bolder text-white fs-16">Olá, {{ nome }}</p>
       </li>
 
       <li class="nav-item pl-3">
@@ -37,7 +37,7 @@
 
     <ul class="navbar-nav ml-auto d-flex align-items-center">
       <li class="nav-item pl-3">
-        <a href=""
+        <a (click)="sair()"
           ><p class="m-0 font-weight-bolder text-dark fs-16">
             Sair <i class="fa fa-sign-out" aria-hidden="true"></i></p
         ></a>
