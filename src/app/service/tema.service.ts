@@ -14,6 +14,37 @@ export class TemaService {
     headers: new HttpHeaders().set('Authorization', environment.token),
   };
 
+  /*getAllTema(): Observable<Topic[]> {
+    return this.http.get<Topic[]>('http://localhost:8080/topics', this.token);
+  }
+
+  getByIdTema(id: number): Observable<Topic> {
+    return this.http.get<Topic>(
+      `http://localhost:8080/topics/${id}`,
+      this.token
+    );
+  }
+
+  postTema(tema: Topic): Observable<Topic> {
+    return this.http.post<Topic>(
+      'http://localhost:8080/topics',
+      tema,
+      this.token
+    );
+  }
+
+  putTema(tema: Topic): Observable<Topic> {
+    return this.http.put<Topic>(
+      'http://localhost:8080/topics',
+      tema,
+      this.token
+    );
+  }
+
+  deleteTema(id: number) {
+    return this.http.delete(`http://localhost:8080/topics/${id}`, this.token);
+  }*/
+
   getAllTema(): Observable<Topic[]> {
     return this.http.get<Topic[]>(
       'https://bloglissa.herokuapp.com/topics',
@@ -24,6 +55,13 @@ export class TemaService {
   getByIdTema(id: number): Observable<Topic> {
     return this.http.get<Topic>(
       `https://bloglissa.herokuapp.com/topics/${id}`,
+      this.token
+    );
+  }
+
+  getByNomeTema(nome: string): Observable<Topic[]> {
+    return this.http.get<Topic[]>(
+      `https://bloglissa.herokuapp.com/topics/desc/${nome}`,
       this.token
     );
   }
