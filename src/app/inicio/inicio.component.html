@@ -17,7 +17,12 @@
           >
             Nova Postagem
           </button>
-          <a class="btn btn-outline-light" href="#postagens">Ver Postagem</a>
+          <a
+            *ngIf="authService.adm()"
+            class="btn btn-outline-light"
+            href="#postagens"
+            >Ver Postagem</a
+          >
         </div>
       </div>
     </div>
@@ -73,6 +78,11 @@
       >
     </div>
   </nav>
+
+  <h2 *ngIf="listPostagens.length == 0" class="text-center text-secondary mt-5">
+    Não existem postagens ainda...
+  </h2>
+
   <div class="tab-content mt-4" id="nav-tabContent">
     <div
       class="tab-pane fade show active"
@@ -80,8 +90,27 @@
       role="tabpanel"
       aria-labelledby="nav-todasPostagens-tab"
     >
+      <div class="row d-flex justify-content-center mt-5 mb-5">
+        <div class="col-md-4">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              id="titulo"
+              placeholder="Pesquise uma postagem usando um título"
+              [(ngModel)]="tituloPost"
+              (keyup)="findByTituloPostagem()"
+            />
+          </div>
+        </div>
+      </div>
+
       <div class="card-columns">
-        <div class="card text-center" *ngFor="let item of listPostagens">
+        <div
+          class="card text-center"
+          *ngFor="let item of listPostagens | orderBy: key:reverse"
+        >
+          <img src="{{ item.image }}" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title m-0">{{ item.title }}</h5>
             <small class="text-muted">Tema: {{ item.topic.description }}</small>
@@ -106,7 +135,11 @@
       aria-labelledby="nav-minhasPostagens-tab"
     >
       <div class="card-columns">
-        <div class="card text-center" *ngFor="let item of usuario.posts">
+        <div
+          class="card text-center"
+          *ngFor="let item of usuario.posts | orderBy: key:reverse"
+        >
+          <img src="{{ item.image }}" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title m-0">{{ item.title }}</h5>
             <small class="text-muted">Tema: {{ item.topic.description }}</small>
@@ -140,8 +173,27 @@
       role="tabpanel"
       aria-labelledby="nav-postagemTema-tab"
     >
+      <div class="row d-flex justify-content-center mt-5 mb-5">
+        <div class="col-md-4">
+          <div class="form-group mb-5">
+            <input
+              type="text"
+              class="form-control"
+              id="tituloPesquisa"
+              placeholder="Pesquise postagens por tema"
+              [(ngModel)]="nomeTema"
+              (keyup)="findByNomeTema()"
+            />
+          </div>
+        </div>
+      </div>
+
       <div class="card-columns" *ngFor="let tema of listTemas">
-        <div class="card text-center" *ngFor="let item of tema.post">
+        <div
+          class="card text-center"
+          *ngFor="let item of tema.post | orderBy: key:reverse"
+        >
+          <img src="{{ item.image }}" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title m-0">{{ item.title }}</h5>
             <p class="card-text mt-3">{{ item.text }}</p>
@@ -208,7 +260,9 @@
         <div class="form-group">
           <label for="tema"
             >Escolha um tema ou
-            <a data-dismiss="modal" routerLink="/tema">cadastre um novo</a>:
+            <a data-dismiss="modal" routerLink="/tema" class="text-info"
+              >cadastre um novo</a
+            >:
           </label>
           <select
             class="form-control"
@@ -221,6 +275,16 @@
               {{ item.description }}
             </option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="imagem">Imagem</label>
+          <input
+            [(ngModel)]="postagem.image"
+            type="text"
+            class="form-control"
+            id="imagem"
+            placeholder="Insira o link de uma imagem"
+          />
         </div>
       </div>
       <div class="modal-footer">

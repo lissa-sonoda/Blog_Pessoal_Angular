@@ -32,6 +32,7 @@ export class EntrarComponent implements OnInit {
         environment.name = this.userLogin.namelog;
         environment.picture = this.userLogin.picturelog;
         environment.id = this.userLogin.idlog;
+        environment.type = this.userLogin.usertypelog;
 
         this.router.navigate(['/inicio']);
       },
